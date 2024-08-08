@@ -5,23 +5,19 @@ import cors from 'cors'; // Import the cors package
 
 // Constants
 const app = express();
-const port = 3000;
 const SECRET_KEY = 'your_secret_key'; // Use a strong key in production
 
-// // Middleware
-// app.use(cors({
-//   origin: 'http://127.0.0.1:5500', // Allow requests from this origin
-//   methods: ['GET', 'POST'],
-//   allowedHeaders: ['Content-Type']
-// }));
+// Middleware
+app.use(cors({
+  origin: '*', // Allow all origins (modify as needed for production)
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
 app.use(bodyParser.json()); // Parse JSON bodies
 
 // In-memory user storage (for demonstration purposes)
-const users = [
-//   { email: 'johndoe@example.com', password: 'password123' } // Sample user
-];
+const users = [];
 
-// Route to handle user signup
 // Route to handle user signup
 app.post('/signup', (req, res) => {
     const { user, email, password } = req.body;
@@ -65,7 +61,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// Export the serverless function
+export default function handler(req, res) {
+  return app(req, res);
+}
