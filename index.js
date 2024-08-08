@@ -16,7 +16,7 @@ app.use(cors({
 app.use(bodyParser.json()); // Parse JSON bodies
 
 // In-memory user storage (for demonstration purposes)
-const users = [];
+const users = [  { email: 'johndoe@example.com', password: 'password123' } // Sample user];
 
 // Route to handle user signup
 app.post('/signup', (req, res) => {
